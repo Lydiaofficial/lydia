@@ -2,6 +2,20 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Wander</title>
+<meta name="description" content="A travel app built around choosing together, and the days after you have paid.">
+<link rel="canonical" href="https://lydia-7l4.pages.dev/work-wander.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon-32.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<meta name="theme-color" content="#1F1F21">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lydia Amadi Chinyere">
+<meta property="og:title" content="Wander — Lydia Amadi Chinyere">
+<meta property="og:description" content="A travel app built around choosing together, and the days after you have paid.">
+<meta property="og:url" content="https://lydia-7l4.pages.dev/work-wander.html">
+<meta property="og:image" content="https://lydia-7l4.pages.dev/images/wander-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
  :root{
   --mica:#1F1F21;--win:#272729;--pane:#202022;--card:rgba(255,255,255,.045);
@@ -283,7 +297,9 @@
 
  /* reading width — a document pane is not a canvas */
  .doc{padding-left:clamp(14px,4vw,40px);padding-right:clamp(14px,4vw,40px);}
- .doc > .head, .doc > .sec, .doc > .folderview{max-width:880px;margin-left:auto;margin-right:auto;}
+ .doc > .head, .doc > .sec, .doc > .folderview,
+ .doc > h1, .doc > .sub, .doc > .props, .doc > .shots, .doc > .fg{
+   max-width:880px;margin-left:auto;margin-right:auto;}
  /* screenshots keep their own scale instead of filling the column */
  .card .fg{grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:12px;margin-top:16px;}
  .card .fi .th img{max-width:100%;height:auto;}

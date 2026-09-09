@@ -2,6 +2,19 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lydia Amadi Chinyere</title>
+<meta name="description" content="Product designer working on clarity, usability and research-driven design. Case studies for OpenRefine, Menturr, Wander, Assetpro and Kirgawa.">
+<link rel="canonical" href="https://lydia-7l4.pages.dev/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon-32.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<meta name="theme-color" content="#1F1F21">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lydia Amadi Chinyere">
+<meta property="og:title" content="Lydia Amadi Chinyere — Product & UX Design">
+<meta property="og:description" content="Product designer working on clarity, usability and research-driven design. Case studies for OpenRefine, Menturr, Wander, Assetpro and Kirgawa.">
+<meta property="og:url" content="https://lydia-7l4.pages.dev/">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
  :root{
   --win:#272729;--pane:#202022;--card:rgba(255,255,255,.045);
@@ -465,10 +478,29 @@
    font:inherit;font-size:13px;padding:9px 11px;border-radius:6px;cursor:pointer;text-align:left;}
  .tpi:hover{background:rgba(255,255,255,.09);color:var(--text);}
  .tpi .gl{font-size:16px;font-family:"Segoe UI Emoji","Apple Color Emoji",sans-serif;}
- @media(max-width:640px){
+ @media(max-width:760px){
    .tbname{display:none;}
-   .traypop{right:8px;}
+   .traypop{right:8px;left:8px;}
  }
+ /* phones: keep four apps in the middle, the rest go to the chevron */
+ @media(max-width:560px){
+   .taskbar{height:52px;padding:0 4px;}
+   .tbcentre{gap:0;}
+   .tbcentre .tbi{width:38px;height:40px;}
+   .tbi .gl{font-size:18px;}
+   .tbcentre .tbi[data-label="Resume"],
+   .tbcentre .tbi[data-label="Links"]{display:none;}
+   .tray{gap:0;right:2px;}
+   .tray .tbi{width:30px;height:38px;}
+   .clock{padding:0 6px;font-size:10.5px;line-height:1.1;}
+   .clock small{font-size:9.5px;}
+   .tbar-end{display:none;}
+   .traypop{bottom:58px;}
+ }
+
+ .tpi.only-narrow{display:none;}
+ @media(max-width:560px){.tpi.only-narrow{display:flex;}}
+ .tpsep{height:1px;background:rgba(255,255,255,.10);margin:5px 4px;}
 </style></head>
 <body>
 
@@ -514,6 +546,10 @@
     <div class="traypop" id="trayPop">
       <button class="tpi" data-href="lab.html" data-label="Lab"><span class="gl">🧪</span>Lab</button>
       <button class="tpi" data-href="notes.html" data-label="Notes"><span class="gl">📝</span>Notes</button>
+      <button class="tpi only-narrow" data-href="resume.pdf" data-label="Resume"><span class="gl">📄</span>Resume</button>
+      <button class="tpi only-narrow" data-href="links.html" data-label="Links"><span class="gl">🌐</span>Links</button>
+      <div class="tpsep"></div>
+      <button class="tpi" data-href="#network" data-label="Network"><span class="gl">📶</span>Network</button>
     </div>
   </div>
 </div>
@@ -557,12 +593,12 @@
 
     <div class="doc">
       <div class="grid" id="grid">
-      <div class="tile" data-slug="openrefine" data-name="OpenRefine" data-type="Open source tool" data-role="Product designer (contract)" data-year="2024" data-screens=", " tabindex="0">
+      <div class="tile" data-slug="openrefine" data-name="OpenRefine" data-type="Open source tool" data-role="Product designer, contract" data-year="2024" data-screens="10" tabindex="0">
         <span class="folder"><span class="fBack"></span><span class="peek"></span><span class="fFront"></span></span>
         <span class="name">OpenRefine</span>
         <span class="kind">Open source tool</span>
       </div>
-      <div class="tile" data-slug="menturr" data-name="Menturr" data-type="Web application" data-role="Sole designer" data-year="2024" data-screens=", " tabindex="0">
+      <div class="tile" data-slug="menturr" data-name="Menturr" data-type="Web application" data-role="Sole designer" data-year="2024" data-screens="9" tabindex="0">
         <span class="folder"><span class="fBack"></span><span class="peek"></span><span class="fFront"></span></span>
         <span class="name">Menturr</span>
         <span class="kind">Web application</span>
@@ -572,17 +608,17 @@
         <span class="name">Wander</span>
         <span class="kind">Mobile app</span>
       </div>
-      <div class="tile" data-slug="assetpro" data-name="Assetpro" data-type="Enterprise system" data-role="Sole designer (assessment)" data-year="2025" data-screens=", " tabindex="0">
+      <div class="tile" data-slug="assetpro" data-name="Assetpro" data-type="Enterprise system" data-role="Sole designer, assessment" data-year="2025" data-screens="11" tabindex="0">
         <span class="folder"><span class="fBack"></span><span class="peek"></span><span class="fFront"></span></span>
         <span class="name">Assetpro</span>
         <span class="kind">Enterprise system</span>
       </div>
-      <div class="tile" data-slug="kirgawa" data-name="Kirgawa" data-type="Web application" data-role="Sole UI/UX designer" data-year="2022–24" data-screens=", " tabindex="0">
+      <div class="tile" data-slug="kirgawa" data-name="Kirgawa" data-type="Web application" data-role="Sole UI/UX designer" data-year="2022–24" data-screens="13" tabindex="0">
         <span class="folder"><span class="fBack"></span><span class="peek"></span><span class="fFront"></span></span>
         <span class="name">Kirgawa</span>
         <span class="kind">Web application</span>
       </div>
-      <div class="tile" data-slug="vela" data-name="Vela" data-type="Mobile app" data-role=", " data-year=", " data-screens=", " tabindex="0">
+      <div class="tile" data-slug="vela" data-name="Vela" data-type="Mobile app" data-role="Product design, end to end" data-year="2026" data-screens="16" tabindex="0">
         <span class="folder"><span class="fBack"></span><span class="peek"></span><span class="fFront"></span></span>
         <span class="name">Vela</span>
         <span class="kind">Mobile app</span>
@@ -1253,6 +1289,9 @@
       var h = b.dataset.href;
       if (h === 'lab.html') openApp('appLab','Lab');
       if (h === 'notes.html') openApp('appNotes','Notes');
+      if (h === 'resume.pdf') openApp('appResume','Resume');
+      if (h === 'links.html') openApp('appLinks','Links');
+      if (h === '#network') say('Connected');
     });
   });
   setActive('Start');
