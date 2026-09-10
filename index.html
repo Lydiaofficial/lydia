@@ -465,10 +465,13 @@
  .tbcentre{display:flex;align-items:center;gap:2px;margin:0 auto;}
  .tray{position:absolute;right:6px;display:flex;align-items:center;gap:2px;}
  .tbi.chev{width:26px;}
- .tbi.start .winlogo{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
-   gap:2.5px;width:19px;height:19px;}
- .tbi.start .winlogo i{background:#4CA6F0;border-radius:1.5px;display:block;}
- .tbi.start:hover .winlogo i{background:#6FBDF7;}
+ .tbi.start .launcher{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+   gap:4px;width:18px;height:18px;}
+ .tbi.start .launcher i{background:rgba(243,243,243,.78);border-radius:50%;display:block;
+   transition:background .18s, transform .3s cubic-bezier(.2,.8,.3,1);}
+ .tbi.start:hover .launcher i{background:var(--accent);}
+ .tbi.start:hover .launcher i:nth-child(1){transform:translate(-1px,-1px);}
+ .tbi.start:hover .launcher i:nth-child(4){transform:translate(1px,1px);}
  .traypop{position:absolute;right:96px;bottom:52px;display:none;flex-direction:column;gap:2px;
    padding:6px;border-radius:10px;min-width:150px;
    background:rgba(44,44,46,.86);backdrop-filter:blur(34px) saturate(170%);
@@ -484,24 +487,44 @@
  }
  /* phones: keep four apps in the middle, the rest go to the chevron */
  @media(max-width:560px){
-   .taskbar{height:52px;padding:0 4px;}
-   .tbcentre{gap:0;}
-   .tbcentre .tbi{width:38px;height:40px;}
-   .tbi .gl{font-size:18px;}
+   /* on a phone this stops pretending to be a desktop taskbar and
+      behaves like a bottom app bar: full width, evenly spaced, thumb height */
+   .taskbar{height:auto;padding:6px 6px calc(6px + env(safe-area-inset-bottom));}
+   .tbcentre{flex:1;justify-content:space-around;gap:0;margin:0;}
+   .tbcentre .tbi{width:auto;flex:1;height:44px;border-radius:10px;}
+   .tbi .gl{font-size:20px;}
    .tbcentre .tbi[data-label="Resume"],
    .tbcentre .tbi[data-label="Links"]{display:none;}
-   .tray{gap:0;right:2px;}
-   .tray .tbi{width:30px;height:38px;}
-   .clock{padding:0 6px;font-size:10.5px;line-height:1.1;}
-   .clock small{font-size:9.5px;}
+   .tbi .tip{display:none;}
+   .tray{position:static;gap:0;margin-left:4px;}
+   .tray .tbi[data-label="Playlist"],
+   .tray .tbi[data-label="Sound"]{display:none;}
+   .tray .tbi.chev{width:34px;height:44px;border-radius:10px;}
+   .clock{display:none;}
    .tbar-end{display:none;}
-   .traypop{bottom:58px;}
+   .traypop{bottom:64px;left:8px;right:8px;}
+   .window{bottom:64px;}
  }
 
  .tpi.only-narrow{display:none;}
  @media(max-width:560px){.tpi.only-narrow{display:flex;}}
  .tpsep{height:1px;background:rgba(255,255,255,.10);margin:5px 4px;}
-</style></head>
+</style><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Lydia Amadi Chinyere",
+  "jobTitle": "Product Designer",
+  "url": "https://lydia-7l4.pages.dev/",
+  "sameAs": ["https://lydiaamadi.substack.com/"],
+  "knowsAbout": ["Product design","UI/UX design","User research","Design systems","Prototyping"],
+  "alumniOf": [
+    {"@type":"CollegeOrUniversity","name":"University of Port Harcourt"},
+    {"@type":"Organization","name":"ALT Product School"}
+  ]
+}
+</script>
+</head>
 <body>
 
 <div class="desktop" id="desktop">
@@ -524,7 +547,7 @@
     <div class="tbname">Lydia</div>
 
     <div class="tbcentre">
-    <button class="tbi start" data-href="#start" data-label="Start"><span class="winlogo"><i></i><i></i><i></i><i></i></span><span class="tip">Start</span></button>
+    <button class="tbi start" data-href="#start" data-label="Start"><span class="launcher"><i></i><i></i><i></i><i></i></span><span class="tip">Start</span></button>
     <button class="tbi" data-href="#works" data-label="Work"><span class="gl">📁</span><span class="tip">Work</span></button>
     <button class="tbi" data-href="about.html" data-label="About"><span class="gl">👤</span><span class="tip">About</span></button>
     <button class="tbi" data-href="#mail" data-label="Contact"><span class="gl">✉️</span><span class="tip">Contact</span></button>
@@ -647,11 +670,6 @@
   <button data-view="list">List</button>
 </div>
 <div class="toast" id="toast"></div>
-
-<form name="contact" netlify netlify-honeypot="bot-field" hidden>
-  <input type="email" name="from"><input type="text" name="subject">
-  <textarea name="message"></textarea><input type="text" name="bot-field">
-</form>
 
 <div class="app" id="appAbout">
   <div class="awin">
@@ -926,6 +944,7 @@
      because browsers do not fire dblclick reliably on phones. */
   /* address assembled here so scrapers reading the HTML never see it */
   var MAIL = ['lydiaamadichinyere','gmail.com'].join('@');
+  var FORM_KEY = '9fe2ca84-4228-4a2a-943d-1cc1aaf071f4';
   var PLAYLIST = '2txMQqT5a0Ew4l3ZG0NPfH';   /* Spotify playlist id */
 
   /* ---- playlist window: embedded, so nobody leaves the desktop ---- */
@@ -982,24 +1001,34 @@
     }
     from.parentNode.classList.remove('err'); note.classList.remove('warn');
     if (!body){ d.getElementById('cBody').focus(); note.textContent = 'Say something first'; return; }
+    if (!FORM_KEY || FORM_KEY.indexOf('YOUR_') === 0){
+      note.textContent = 'Form key not set yet'; note.classList.add('warn'); return;
+    }
 
-    note.textContent = 'Sending…';
-    var payload = new URLSearchParams({
-      'form-name':'contact', from:from.value.trim(), subject:subject, message:body, 'bot-field':''
-    }).toString();
-
-    fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:payload})
-      .then(function(r){
-        if (!r.ok) throw new Error('nope');
-        d.getElementById('cSentTo').textContent = 'I will reply to ' + from.value.trim() + '.';
-        compose.classList.add('sent'); click(0.18);
+    note.textContent = 'Sending';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+      body: JSON.stringify({
+        access_key: FORM_KEY,
+        subject: 'Portfolio: ' + subject,
+        from_name: from.value.trim(),
+        email: from.value.trim(),
+        replyto: from.value.trim(),
+        message: body,
+        botcheck: ''
       })
-      .catch(function(){
-        /* not deployed on Netlify — hand the whole thing to their mail app instead */
-        note.textContent = 'Opening your mail app';
-        location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) +
-                        '&body=' + encodeURIComponent(body + '\n\nFrom: ' + from.value.trim());
-      });
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if (!j.success) throw new Error(j.message || 'failed');
+      d.getElementById('cSentTo').textContent = 'I will reply to ' + from.value.trim() + '.';
+      compose.classList.add('sent'); click(0.18); note.textContent = '';
+    })
+    .catch(function(){
+      note.textContent = 'Did not send. Copy the address instead.';
+      note.classList.add('warn');
+    });
   });
   d.getElementById('cAgain').addEventListener('click', function(){
     compose.classList.remove('sent');
